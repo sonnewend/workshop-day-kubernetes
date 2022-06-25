@@ -6,26 +6,6 @@ Mentoria Arquiteto Cloud - Hands-on Lab
 
 Deploy a Web application and API Microservice to a Kubernetes platform hosted on Azure Kubernetes Services (AKS)
 
-   ![Screenshot of the App Modernization](/AllFiles/Images/PartsUnlimited.png)
-
-## Requirements Hands-on lab
-
-1. An active Microsoft Azure subscription in preference be Pay-as-you-go or MSDN.
-
-   - You must have enough cores available in your subscription to create the build agent and Azure Kubernetes Service cluster in Before the Hands-on Lab. This lab requires a minimum of eight cores which may demand more cluster resources than your current quota will allow. In such cases, you can request a CPU core quota increase to deploy the AKS cluster.
-
-  - **Important:** To complete this lab, you must have sufficient rights within your Azure AD tenant to register resource providers in your Azure Subscription.
-
-2. An active [GitHub Account](https://github.com) in Free or Pay plans.
-
-3. Local machine or a virtual machine configured with:
-
-   - A browser, such as Microsoft Edge or Google Chrome, for consistency with the lab implementation tests.
-
-4. You will install other tools throughout the exercises.
-
-> **Very important**: Make sure to type all the commands as they appear in the guide. Do not try to copy and paste to your command windows or other documents when instructed to enter the information shown in this document, except where explicitly stated in this document. There can be issues with Copy and Paste that result in errors, instructions execution, or file content creation.
-
 ## Hands-on project 
 
 Fabrikam Medical Conferences (FabMedical) provides conference website services tailored to the medical community. They are refactoring their application to run as a Docker application. They want to implement a proof of concept that will help them get familiar with the development process, lifecycle of deployment, and critical aspects of the hosting environment. They will be deploying their applications to Azure Kubernetes Service and want to learn how to deploy containers in a dynamically load-balanced manner, discover containers, and scale them on demand.
@@ -52,7 +32,25 @@ Each tenant will have the following containers:
 
 - **Content service**: The API that handles content for the conference, such as speakers, sessions, workshops, and sponsors.
 
-## Prereqs Hands-on lab (15 minutes)
+## Requirements Hands-on lab
+
+1. An active Microsoft Azure subscription in preference be Pay-as-you-go or MSDN.
+
+   - You must have enough cores available in your subscription to create the build agent and Azure Kubernetes Service cluster in Before the Hands-on Lab. This lab requires a minimum of eight cores which may demand more cluster resources than your current quota will allow. In such cases, you can request a CPU core quota increase to deploy the AKS cluster.
+
+  - **Important:** To complete this lab, you must have sufficient rights within your Azure AD tenant to register resource providers in your Azure Subscription.
+
+2. An active [GitHub Account](https://github.com) in Free or Pay plans.
+
+3. Local machine or a virtual machine configured with:
+
+   - A browser, such as Microsoft Edge or Google Chrome, for consistency with the lab implementation tests.
+
+4. You will install other tools throughout the exercises.
+
+> **Very important**: Make sure to type all the commands as they appear in the guide. Do not try to copy and paste to your command windows or other documents when instructed to enter the information shown in this document, except where explicitly stated in this document. There can be issues with Copy and Paste that result in errors, instructions execution, or file content creation.
+
+## Before Hands-on lab (15 minutes)
 
 You should follow all the steps provided in this section _before_ taking part in the hands-on lab ahead of time as some of these steps take time.
 
