@@ -50,7 +50,7 @@ Each tenant will have the following containers:
 
 > **Very important**: Make sure to type all the commands as they appear in the guide. Do not try to copy and paste to your command windows or other documents when instructed to enter the information shown in this document, except where explicitly stated in this document. There can be issues with Copy and Paste that result in errors, instructions execution, or file content creation.
 
-## Before Hands-on lab (15 minutes)
+## Before Hands-on lab (30 minutes)
 
 You should follow all the steps provided in this section _before_ taking part in the hands-on lab ahead of time as some of these steps take time.
 
@@ -134,10 +134,7 @@ FabMedical has provided starter files for you. They have taken a copy of the web
 
    > **Note**: If you run into the error below, you may have to either use a different regional pair or increase your regional core quotas in your current regions. This lab's cloud resources require at least eight available cores in your regional core quota. An up to date list of Azure Region Pairs can be found at [this link](https://docs.microsoft.com/en-us/azure/best-practices-availability-paired-regions#azure-regional-pairs "Azure Region Pairs").
 
-      ```bash
-      {"error":{"code":"InvalidTemplateDeployment","message":"The template deployment 'azuredeploy' is not valid according to the validation procedure. The tracking id is '3d4adbc2-647b-4741-8d98-fe20495e0541'. See inner errorsfor details.","details":[{"code":"QuotaExceeded","message":"Provisioning of resource(s) for container service fabmedical-??? in resource group fabmedical-??? failed. Message: {\n  \"code\": \"QuotaExceeded\",\n  \"message\": \"Provisioning of resource(s) for container service fabmedical-??? in resource group fabmedical-??? failed. Message: Operation could not be completed as it results in exceeding approved Total Regional Cores quota. Additional details - Deployment Model: Resource Manager, Location: eastus, Current Limit: 10, Current Usage: 8, Additional Required: 4, (Minimum) New Limit Required: 12. Submit a request for Quota increase at https://aka.ms/ProdportalCRP/#blade/Microsoft_Azure_Capacity/UsageAndQuota.ReactView/Parameters/%7B%22subscriptionId%22:%228c924580-ce70-48d0-a031-1b21726acc1a%22,%22command%22:%22openQuotaApprovalBlade%22,%22quotas%22:[%7B%22location%22:%22eastus%22,%22providerId%22:%22Microsoft.Compute%22,%22resourceName%22:%22cores%22,%22quotaRequest%22:%7B%22properties%22:%7B%22limit%22:12,%22unit%22:%22Count%22,%22name%22:%7B%22value%22:%22cores%22%7D%7D%7D%7D]%7D by specifying parameters listed in the ‘Details’ section for deployment to succeed. Please read more about quota limits at https://docs.microsoft.com/en-us/azure/azure-supportability/regional-quota-requests. Details: \"\n }. Details: "}]}}
-      ```
-
+ 
 3. Configure your Git email and name.
 
    ```bash
@@ -234,6 +231,7 @@ FabMedical has provided starter files for you. They have taken a copy of the web
    docker image push fabmedical[SUFFIX].azurecr.io/content-web:latest
    ```
 
+6. Finally, exit the SSH session by running the **EXIT** command.
 
 ## Exercise 1: Migrate MongoDB to Cosmos DB using Azure Database Migration Service (30 min)
 
@@ -343,28 +341,16 @@ In this exercise, you will connect to the Azure Kubernetes Service cluster you c
 
 This task will gather the information you need about your Azure Kubernetes Service cluster to connect to the cluster and execute commands to connect to the Kubernetes management dashboard from the cloud shell.
 
-> **Note**: The following tasks should be executed in cloud shell and not the build agent VM, so disconnect from build agent VM if still connected.
+> **Note**: The following tasks should be executed in Cloud Shell and not the build agent VM, so disconnect from build agent VM if still connected.
 
-1. Verify that you are connected to the correct subscription with the following command to show your default subscription:
 
-   ```bash
-   az account show
-   ```
-
-   - Ensure you are connected to the correct subscription. List your subscriptions and then set the subscription by its id with the following commands (similar to what you did in cloud shell before the lab):
-
-   ```bash
-   az account list
-   az account set --subscription {id}
-   ```
-
-2. Configure kubectl to connect to the Kubernetes cluster:
+1. Configure kubectl to connect to the Kubernetes cluster:
 
    ```bash
    az aks get-credentials -a --name fabmedical-SUFFIX --resource-group fabmedical-SUFFIX
    ```
 
-3. Test that the configuration is correct by running a simple kubectl command to produce a list of nodes:
+2. Test that the configuration is correct by running a simple kubectl command to produce a list of nodes:
 
    ```bash
    kubectl get nodes
@@ -376,7 +362,7 @@ This task will deploy the API application to the Azure Kubernetes Service cluste
 
 1. Define a new Namespace for our API deployment. Select the **Namespaces** blade of the fabmedical-[SUFFIX] AKS resource detail page of the Azure Portal, and on the Namespaces tab select **+ Add**.
 
-2. In the **Add with YAML** screen, paste the following YAML and choose **Add**.
+2. In the **Add with YAML** screen, paste the following YAML and choose **Create**.
 
     ```yaml
     apiVersion: v1
@@ -389,7 +375,7 @@ This task will deploy the API application to the Azure Kubernetes Service cluste
 
 3. Define a Service for our API so that the application is accessible within the cluster. Select the **Services and ingresses** blade of the fabmedical-[SUFFIX] AKS resource detail page of the Azure Portal, and on the Services tab, select **+ Add**.
 
-4. In the **Add with YAML** screen, paste the YAML below and choose **Add**.
+4. In the **Add with YAML** screen, paste the YAML below and choose **Create**.
 
     ```yaml
     apiVersion: v1
@@ -413,7 +399,7 @@ This task will deploy the API application to the Azure Kubernetes Service cluste
 
 5. Select **Workloads** under the **Kubernetes resources** section in the left navigation.
 
-6. From the Workloads view, with **Deployments** selected (the default), then select **+ Add**.
+6. From the Workloads view, with **Deployments** selected (the default), then select **Create**.
 
 7. In the **Add with YAML** screen that loads, paste the following YAML and update the `[LOGINSERVER]` placeholder with the name of the ACR instance.
 
@@ -512,9 +498,9 @@ This task will deploy the API application to the Azure Kubernetes Service cluste
     ```
 
 
-14. Return to the AKS blade in the Azure Portal and select **Configuration** under the **Kubernetes resources** section. Select **Secrets** and choose **+ Add**.
+14. Return to the AKS blade in the Azure Portal and select **Configuration** under the **Kubernetes resources** section. Select **Secrets** and choose **+ Create**.
 
-15. In the **Add with YAML** screen, paste following YAML and replace the placeholder with the encoded connection string from your clipboard and choose **Add**. Note that YAML is position sensitive so you must ensure indentation is correct when typing or pasting.
+15. In the **Add with YAML**, paste following YAML and replace the placeholder with the encoded connection string from your clipboard and choose **Add**. Note that YAML is position sensitive so you must ensure indentation is correct when typing or pasting.
 
     ```yaml
     apiVersion: v1
@@ -860,7 +846,7 @@ This task will restart containers and validate that the restart does not impact 
 
 10. Return to the sample website's stats page in the browser and refresh while Kubernetes scales down the number of Pods. You will notice that only one API hostname shows up, even though you may still see several running pods in the API replica set view. This behavior is because Kubernetes will no longer send traffic to the pods it has selected to terminate, even though several pods are running. As a result, only one pod will show in the API Replica Set view in a few moments.
 
-### Configure Cosmos DB Autoscale
+### OPTIONAL: Configure Cosmos DB Autoscale
 
 This task will set up Autoscaling on Azure Cosmos DB.
 
@@ -878,7 +864,7 @@ This task will set up Autoscaling on Azure Cosmos DB.
 
 7. Perform the same operation on the `speakers` collection to enable **Autoscale** on it.
 
-### Test Cosmos DB Autoscale
+### OPTIONAL: Test Cosmos DB Autoscale
 
 This task will run a performance test script that will test the Autoscale feature of Azure Cosmos DB so you can see that it will now scale greater than 400 RU/s.
 
@@ -944,7 +930,7 @@ In this task, you will update the web service to support dynamic discovery throu
 
 3. Locate the replicas node and update the required count to a value of `4`.
 
-4. Next, scroll to the web containers spec as shown in the screenshot. Remove the hostPort entry for the web container's port mapping.
+4. Next, scroll to the web containers spec. Remove the hostPort entry for the web container's port mapping.
 
 5. Select **Review + save** and then confirm the change and **Save**.
 
@@ -1006,7 +992,6 @@ This task will edit the web application source code to add Application Insights 
     appInsights.start();
     ```
 
-    ![A screenshot of the code editor showing updates in context of the app.js file](media/hol-2019-10-02_12-33-29.png "AppInsights updates in app.js")
 
 5. Save changes and close the editor.
 
@@ -1145,7 +1130,7 @@ This task will set up a Kubernetes Ingress using an [Nginx proxy server](https:/
     > kubectl get svc --namespace ingress-demo
     > ```
     >
-   ![A screenshot of Azure Cloud Shell showing the command output.](media/Ex4-Task5.5a.png "View the ingress controller LoadBalancer")
+
 
 5. Open the [Azure Portal Resource Groups blade](https://portal.azure.com/?feature.customPortal=false#blade/HubsExtension/BrowseResourceGroups) and locate the Resource Group automatically created to host the Node Pools for AKS. It will have the naming format of `MC_fabmedical-[SUFFIX]_fabmedical-[SUFFIX]_[REGION]`.
 
